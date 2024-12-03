@@ -1,12 +1,14 @@
 "use client";
 
 import { type Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/router";
 
  
 
 export function AuthButton({ session }: { session: Session | null }) {
 
   const supabase = createClientComponentClient({});
+  const router = useRouter( )
 
   const handleSingIn = async () => {
     await supabase.auth.signInWithOAuth({
@@ -19,7 +21,8 @@ export function AuthButton({ session }: { session: Session | null }) {
 
   const handleSingOut = async () => {
     await supabase.auth.signOut();
-  };
+    router.push('/') // redirecciona al home despues de cerrar sesion
+  }
 
 
 

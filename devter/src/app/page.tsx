@@ -1,6 +1,7 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import AuthButton from './components/auth-button-client';
+
+import { AuthButtonServer } from './components/auth-button-server';
 
 export default async function Home() {
   // Crear el cliente de Supabase con las cookies de Next.js
@@ -26,7 +27,7 @@ export default async function Home() {
   return (
     <main className="text-center items-center">
     
-      <AuthButton />
+      <AuthButtonServer />
       <pre>{JSON.stringify(posts, null, 2)}</pre>
     </main>
   );
