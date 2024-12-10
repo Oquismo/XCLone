@@ -1,7 +1,7 @@
 "use client";
 
 import { type Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
  
 
