@@ -1,35 +1,29 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-
-import { AuthButtonServer } from './components/auth-button-server';
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { AuthButtonServer } from "@/app/components/auth-button-server";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  // Crear el cliente de Supabase con las cookies de Next.js
   const supabase = createServerComponentClient({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-  
-
-  // Realizar la consulta a la tabla 'posts'
-  const { data: posts, error } = await supabase.from('posts').select();
-
-  // Manejar errores si ocurre alguno
-  if (error) {
-    console.error('Error fetching posts:', error.message);
-    return (
-      <main className="text-center items-center">
-        <h1>Error cargando posts</h1>
-        <p>{error.message}</p>
-      </main>
-    );
+  if (session === null) {
+    redirect("/login");
   }
 
-  // Mostrar los datos si la consulta es exitosa
+  const { data: posts } = await supabase
+  .from("posts")
+  .select("*, auth.users(email");
+
   return (
-    <main className="text-center items-center">
-    
-      <AuthButtonServer />
-      <pre>{JSON.stringify(posts, null, 2)}</pre>
+    <main className="flex min-h-screen flex-col items-center justify-between mt-20">
+      <main className="mt-4 items-center justify-between">
+        <AuthButtonServer />
+        
+        <pre>{JSON.stringify(posts, null, 2)}</pre>
+      </main>
     </main>
   );
 }
-
