@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { AuthButtonServer } from "@/app/components/auth-button-server";
 import { redirect } from "next/navigation";
 import PostCard from "./components/post-card";
+import { PostList } from "./components/post-list";
 
 
 export default async function Home() {
@@ -22,38 +23,17 @@ export default async function Home() {
   return (
     
   
-    <main className="flex min-h-screen flex-col items-center justify-between mt-20">
+    <main className="flex min-h-screen flex-col items-center justify-between ">
+      <section className="max-w-[600px] mx-auto border-l border-r
+       border-white/30 h-full min-h-screen">
+      <AuthButtonServer />
+      <PostList posts={posts}/>
+      </section>
       <main className="mt-4 items-center justify-between">
-        <AuthButtonServer />
-        {
-          posts?.map(post =>{
-            const{
-              id,
-              user,
-              content,
-            } = post
-            const{
-              user_name: userName,
-              name: userFullName,
-              avatar_url: avatarUrl,
-             
-            } = user
-            return(
-
-            <PostCard 
-            content={content}
-            key={id} 
-            userName={userName} 
-            userFullName={userFullName} 
-            avatar_url={avatarUrl}
-            />
-          ) 
-          })
-        }
+    
         
-        {/* <pre>
-          {JSON.stringify(posts, null, 2)}
-        </pre> */}
+        
+   
       </main>
     </main>
   

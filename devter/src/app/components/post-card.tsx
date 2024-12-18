@@ -2,6 +2,9 @@
 import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
 import {useState} from "react";
 import Link from "next/link";
+import { IconMessageCircle } from '@tabler/icons-react';
+import { IconRepeat } from '@tabler/icons-react';
+import { IconHeartPlus } from '@tabler/icons-react';
 
 export default function PostCard({
     userName,
@@ -18,7 +21,9 @@ export default function PostCard({
   const [isFollowed, setIsFollowed] = useState(false);
 
   return (
-    <Card className="max-w-[340px]">
+    <Card className=" swadow-none bg-transparent hover:bg-slate-800
+    transition
+    border-b rounded-none cursor-pointer border-white/20">
       <CardHeader className="justify-between">
         <div className="flex gap-2">
             <Link href={`/${userName}`}>
@@ -41,21 +46,23 @@ export default function PostCard({
           {isFollowed ? "Unfollow" : "Follow"}
         </Button>
       </CardHeader>
-      <CardBody className="px-3 py-0 text-small text-default-400">
+      <CardBody className="px-3 py-0 text-small text-white">
         <p>{content}</p>
         <span className="pt-2">
 
         </span>
       </CardBody>
       <CardFooter className="gap-3">
-        <div className="flex gap-1">
-          <p className="font-semibold text-default-400 text-small">4</p>
-          <p className=" text-default-400 text-small">Following</p>
-        </div>
-        <div className="flex gap-1">
-          <p className="font-semibold text-default-400 text-small">97.1K</p>
-          <p className="text-default-400 text-small">Followers</p>
-        </div>
+        <button>
+      <IconMessageCircle className="w-4 h-4"/>
+      </button>
+      <button>
+      <IconRepeat className="w-4 h-4"/>
+      </button>
+      <button>
+      <IconHeartPlus className="w-4 h-4"/>
+      </button>
+        
       </CardFooter>
     </Card>
   );
