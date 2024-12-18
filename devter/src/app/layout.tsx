@@ -1,6 +1,11 @@
+"use client";
+
 import type { Metadata } from "next";
+import * as React from "react";
 import localFont from "next/font/local";
 import "./globals.css";
+import { NextUIProvider } from "@nextui-org/react";
+import Provider from './Provider';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,10 +18,6 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "Clon de X",
-  description: "Clon de X ",
-};
 
 export default function RootLayout({
   children,
@@ -24,12 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className="dark">
+      
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Provider>{children}</Provider>
+        
       </body>
+      
     </html>
   );
 }
